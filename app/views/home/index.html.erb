@@ -1,1 +1,2 @@
 <h1> Welcome <%= current_user.name if user_signed_in? %> </h1>
+<%= link_to 'Add user', new_user_invitation_path %>
