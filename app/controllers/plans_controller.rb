@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user!
   # GET /plans or /plans.json
   def index
     @plans = Plan.all
@@ -13,10 +13,12 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
+    authorize @plan
   end
 
   # GET /plans/1/edit
   def edit
+    authorize @plan
   end
 
   # POST /plans or /plans.json
@@ -31,8 +33,9 @@ class PlansController < ApplicationController
 
   # PATCH/PUT /plans/1 or /plans/1.json
   def update
-    if @plan.update(post_params)
-      redirect_to plan_url(@plan), notice: 'Post was successfully updated.'
+    authorize @plan
+    if @plan.update(plan_params)
+      redirect_to plan_url(@plan), notice: 'Plan was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +43,7 @@ class PlansController < ApplicationController
 
   # DELETE /plans/1 or /plans/1.json
   def destroy
-
+    authorize @plan
     if @plan.destroy
       redirect_to plans_url, notice: 'Plan was successfully destroyed.'
     else
