@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { invitations: 'invitations' }
   root to: 'home#index'
   resources :subscriptions, only: %i[create destroy]
+  resources :usages
 end
