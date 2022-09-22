@@ -8,4 +8,5 @@ class User < ApplicationRecord
          :confirmable
 
   has_many :plans
+  has_many :subscriptions, dependent: :destroy
 end

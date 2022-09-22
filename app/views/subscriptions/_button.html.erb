@@ -1,0 +1,8 @@
+
+<% sub = current_user.subscriptions.find_by(plan_id: plan.id)%>
+
+<% if sub.nil? %>
+  <%= link_to 'Subscribe', subscriptions_path(user_id: current_user.id, plan_id: plan.id), method: :post, class:'btn btn-primary'%>
+<% else %>
+  <%= link_to 'Unsuscribe', subscription_path(id: sub.id, user_id: current_user.id, plan_id: plan.id), method: :delete, class:'btn btn-secondary'%>
+<% end %>

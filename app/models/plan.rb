@@ -3,4 +3,5 @@ class Plan < ApplicationRecord
   validates :monthly_fee, presence: true
   belongs_to :user
   has_many :features, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 end
