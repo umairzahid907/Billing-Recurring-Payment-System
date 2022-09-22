@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @feature.name %>
+</p>
+
+<p>
+  <strong>Unit price:</strong>
+  <%= @feature.unit_price %>
+</p>
+
+<p>
+  <strong>Max unit limit:</strong>
+  <%= @feature.max_unit_limit %>
+</p>
+
+<%= link_to 'Edit', edit_plan_feature_path(@plan, @feature) %> |
+<%= link_to 'Back', plan_features_path %>

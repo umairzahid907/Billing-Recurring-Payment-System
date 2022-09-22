@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
-
+<h1><%= @plan.name %></h1>
+<h3><%= @plan.monthly_fee %></h3>
 <%= link_to 'Edit', edit_plan_path(@plan) %> |
 <%= link_to 'Back', plans_path %>
+<br>
+<%= link_to 'Add feature', new_plan_feature_path(plan_id: @plan.id) %>
+<%= render partial: 'features/show', locals: { features: @plan.features } %>
