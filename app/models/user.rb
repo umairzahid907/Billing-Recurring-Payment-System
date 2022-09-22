@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   has_many :plans
   has_many :subscriptions, dependent: :destroy
+  has_many :transactions, dependent: :destroy
 end
