@@ -12,14 +12,16 @@ class FeaturesController < ApplicationController
 
   def new
     @feature = @plan.features.new
+    authorize @feature
   end
 
   def edit
+    authorize @feature
   end
 
   def create
     @feature = @plan.features.new(feature_params)
-
+    authorize @feature
     if @feature.save
       redirect_to plan_url(@plan), notice: 'Feature was successfully created.'
     else
@@ -28,6 +30,7 @@ class FeaturesController < ApplicationController
   end
 
   def update
+    authorize @feature
     if @feature.update(feature_params)
       redirect_to plan_url(@plan), notice: 'Feature was successfully updated.'
     else
@@ -36,8 +39,12 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
-    @feature.destroy
+    authorize @feature
+    if @feature.destroy
       redirect_to plan_features_url, notice: 'Feature was successfully destroyed.'
+    else
+      redirect_to plan_feature_url(@feature), alert: 'Could not delete this feature.'
+    end
   end
 
   private
