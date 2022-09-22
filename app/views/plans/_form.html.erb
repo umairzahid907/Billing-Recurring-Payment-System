@@ -1,0 +1,31 @@
+<%= form_with(model: plan, local: true) do |form| %>
+  <% if plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+
+      <ul>
+      <% plan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='field'>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true%>
+  </div>
+
+  <div class='field'>
+    <%= form.label 'Monthly fee' %>
+    <%= form.text_field :monthly_fee, required: true%>
+  </div>
+
+  <div class='field'>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
