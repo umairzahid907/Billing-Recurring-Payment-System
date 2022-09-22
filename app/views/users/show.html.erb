@@ -1,0 +1,13 @@
+<h1><%= @user.name %></h1>
+<br>
+<% @user.subscriptions.each do |subscription| %>
+  <h2><%= subscription.plan.name %></h2>
+  <% subscription.plan.features.each do |feature| %>
+    <% bool = feature.usages.find_by(subscription_id: subscription.id) %>
+    <% bool.nil? ? units = 0 : units = bool.units_used %>
+    <%= feature.name %>
+    <%= units %>
+    <%= link_to 'Add usage', new_usage_path(feature_id: feature.id, subscription_id: subscription.id)%>
+    <br>
+  <% end %>
+<% end %>

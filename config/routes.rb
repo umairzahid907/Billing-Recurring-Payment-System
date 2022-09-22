@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resources :subscriptions, only: %i[create destroy]
   resources :usages
+  resources :users
 end

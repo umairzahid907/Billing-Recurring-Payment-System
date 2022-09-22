@@ -18,7 +18,7 @@ class UsagesController < ApplicationController
   def create
     @usage = Usage.new(usage_params)
     if @usage.save
-      redirect_to root_url, notice: 'usage was successfully added.'
+      redirect_to users_url, notice: 'usage was successfully added.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class UsagesController < ApplicationController
 
   def update
     if @usage.update(usage_params)
-      redirect_to root_url, notice: 'usage was successfully updated.'
+      redirect_to users_url, notice: 'usage was successfully updated.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,9 +34,9 @@ class UsagesController < ApplicationController
 
   def destroy
     if @usage.destroy
-      redirect_to root_url, notice: 'usage was successfully destroyed.'
+      redirect_to users_url, notice: 'usage was successfully destroyed.'
     else
-      redirect_to root, alert: 'Could not delete this usage.'
+      redirect_to users_url, alert: 'Could not delete this usage.'
     end
   end
 
