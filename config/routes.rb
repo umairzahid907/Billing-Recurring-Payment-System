@@ -4,4 +4,5 @@ Rails.application.routes.draw do
     resources :features
   end
   root to: 'home#index'
+  resources :subscriptions, only: %i[create destroy]
 end
