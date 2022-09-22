@@ -25,6 +25,7 @@ class PlansController < ApplicationController
   # POST /plans or /plans.json
   def create
     @plan = Plan.new(plan_params)
+    authorize @plan
     if @plan.save
       redirect_to plan_url(@plan), notice: 'Plan was successfully created.'
     else

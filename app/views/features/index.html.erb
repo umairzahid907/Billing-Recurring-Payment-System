@@ -1,0 +1,5 @@
+<%= render partial: 'features/show', locals: { features: @features } %>
+<br>
+
+<%= link_to 'New Feature', new_plan_feature_path(@plan) %>
+<%= link_to 'back', plan_path(@plan) %>

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_21_125354) do
+ActiveRecord::Schema.define(version: 2022_09_22_062339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "features", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.integer "unit_price", null: false
+    t.integer "max_unit_limit", null: false
+    t.bigint "plan_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_features_on_plan_id"
+  end
 
   create_table "plans", force: :cascade do |t|
     t.bigint "user_id"
@@ -54,5 +64,6 @@ ActiveRecord::Schema.define(version: 2022_09_21_125354) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "features", "plans"
   add_foreign_key "plans", "users"
 end
