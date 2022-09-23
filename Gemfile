@@ -66,3 +66,7 @@ gem 'devise'
 gem 'pundit', '~> 2.2'
 
 gem 'devise_invitable', '~> 2.0.0'
+
+gem 'stripe'
+
+gem 'jquery-rails', '~> 4.4'

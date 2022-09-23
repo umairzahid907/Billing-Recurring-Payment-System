@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :usages
   resources :users
   resources :transactions, only: %i[index create]
+  post 'checkout/create', to: 'checkout#create'
 end
