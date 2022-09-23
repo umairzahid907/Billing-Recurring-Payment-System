@@ -5,6 +5,7 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.new(subscription_params)
     if @subscription.save
       redirect_to plans_url, notice: 'Successfully subscribed.'
+      perform_transaction
     else
       redirect_to plans_url, notice: 'Could not subscribe.'
     end
@@ -29,5 +30,9 @@ class SubscriptionsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = "This subscription doesn't exist!"
     redirect_to plans_url
+  end
+
+  def perform_transaction
+    Transaction.create(user_id: @subscription.user_id, subscription_id: @subscription.id, amount: @subscription.plan.monthly_fee)
   end
 end
