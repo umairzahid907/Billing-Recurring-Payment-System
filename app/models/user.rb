@@ -18,6 +18,6 @@ class User < ApplicationRecord
     response = Stripe::Customer.create({
                   email: email
                 })
-    update_attribute :stripe_customer_id, response[:id]
+    update_attribute(:stripe_customer_id, response[:id])
   end
 end

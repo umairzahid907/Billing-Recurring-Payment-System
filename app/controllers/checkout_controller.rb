@@ -1,25 +1,23 @@
-class FeaturesController < ApplicationController
+class CheckoutController < ApplicationController
 
   def create
-    plan = Plan.find(aprams[:id])
+    plan = Plan.find(params[:id])
     @session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
-      line_items: [{
-        name: plan.name,
-        amount: plan.monthly_fee,
-        currency: 'usd',
-        quantity: 1
-      }
+      line_items: [
         price_data: {
-          product: '{{PRODUCT_ID}}',
-          unit_amount: 1500,
+          unit_amount: plan.monthly_fee,
           currency: 'usd',
+          product_data: {
+            name: plan.name
+          }
         },
         quantity: 1,
       ],
       mode: 'payment',
-      success_url: 'https://example.com/success',
-      cancel_url: 'https://example.com/cancel',
+      success_url: root_url,
+      cancel_url: root_url,
     })
+
   end
 end

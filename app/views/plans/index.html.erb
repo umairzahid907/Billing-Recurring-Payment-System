@@ -15,8 +15,8 @@
         <td><%= link_to 'Show', plan %></td>
         <td><%= link_to 'Edit', edit_plan_path(plan) %></td>
         <td><%= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= render partial: 'subscriptions/button', locals: {plan: plan} %></td>
-        <td><%= button_to 'Pay', checkout_create_path, params: { id: plan.id }%></td>
+        <%# <td><%= render partial: 'subscriptions/button', locals: {plan: plan}</td> %>
+        <td><%= button_to 'Subscribe', checkout_create_path, params: { id: plan.id }, remote: true%></td>
       </tr>
     <% end %>
   </tbody>
