@@ -1,0 +1,19 @@
+<div class="container mb-5 mt-5 scroll">
+  <div class="pricing card-deck flex-column flex-md-row mb-3">
+    <div class="card border-primary card-pricing text-center px-3 mb-4">
+      <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm"><%= plan.name %></span>
+      <div class="bg-transparent card-header pt-4 border-0">
+        <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="15">$<span class="price"><%= plan.monthly_fee %></span><span class="h6 text-muted ml-2">/ per month</span></h1>
+      </div>
+      <div class="card-body pt-0">
+        <ul class="list-unstyled mb-4">
+          <% plan.features.each do |feature| %>
+            <li><%= feature.name %></li>
+          <% end %>
+        </ul>
+        <td><%= render partial: 'subscriptions/button', locals: {plan: plan}%></td>
+        <td><%= link_to 'Add features', new_plan_feature_path(plan_id: plan.id), class:'btn btn-secondary' if admin? %></td>
+      </div>
+    </div>
+  </div>
+</div>

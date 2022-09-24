@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+.body{
+  margin: 0 20%;
+  font-family: "Helvetica", Sans-Serif;
+}
+.navbar{
+  padding: 20px 40px;
+}
+.navbar-brand{
+  font-size: 30px;
+}
+.scroll{
+  max-height: 700px;
+  overflow: scroll;
+}
