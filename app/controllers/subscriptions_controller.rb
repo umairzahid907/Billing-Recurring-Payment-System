@@ -1,11 +1,13 @@
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[destroy]
-  before_action :authenticate_user!
+  before_action :make_payment, only: %i[create]
+
   def create
+  end
+  def success
     @subscription = Subscription.new(subscription_params)
     if @subscription.save
-      redirect_to plans_url, notice: 'Successfully subscribed.'
-      perform_transaction
+      redirect_to plans_url, notice: 'Subscribed successfully.'
     else
       redirect_to plans_url, notice: 'Could not subscribe.'
     end
@@ -22,7 +24,7 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_params
-    params.permit(:user_id, :plan_id)
+    params.permit(:user_id, :plan_id, :stripe_subscription_id)
   end
 
   def set_subscription
@@ -34,5 +36,20 @@ class SubscriptionsController < ApplicationController
 
   def perform_transaction
     Transaction.create(user_id: @subscription.user_id, subscription_id: @subscription.id, amount: @subscription.plan.monthly_fee)
+  end
+
+  def make_payment
+    plan = Plan.find(params[:plan_id])
+    @session = Stripe::Checkout::Session.create({
+      payment_method_types: ['card'],
+      line_items: [
+        price: plan.stripe_price_id,
+        quantity: 1,
+      ],
+      mode: 'subscription',
+      success_url: subscription_success_url(user_id: params[:user_id], plan_id: params[:plan_id]),
+      cancel_url: root_url,
+    })
+    p @session
   end
 end

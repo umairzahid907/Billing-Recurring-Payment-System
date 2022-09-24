@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_23_064509) do
+ActiveRecord::Schema.define(version: 2022_09_23_122738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2022_09_23_064509) do
     t.integer "monthly_fee", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_price_id", default: "null"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
