@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   after_create :register_customer
   validates :name, length: { maximum: 50 }
+  validate :avatar_format
   enum role: { buyer: 0, admin: 1 }
   devise :invitable, :database_authenticatable,
          :recoverable, :rememberable, :validatable,
@@ -11,6 +12,7 @@ class User < ApplicationRecord
   has_many :plans
   has_many :subscriptions, dependent: :destroy
   has_many :transactions, dependent: :destroy
+  has_one_attached :avatar, dependent: :destroy
 
   private
 
@@ -19,5 +21,10 @@ class User < ApplicationRecord
                   email: email
                 })
     update_attribute(:stripe_customer_id, response[:id])
+  end
+
+  def avatar_format
+    return unless avatar.attached?
+    return if avatar.blob.content_type.start_with? 'image/'
   end
 end
