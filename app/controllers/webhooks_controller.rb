@@ -27,7 +27,6 @@ class WebhooksController < ApplicationController
       session = event.data.object
       @user = User.find_by(stripe_customer_id: session.customer)
       @user.update_attribute(name: success)
-      end
     end
 
     render json: { message: 'success' }
