@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   resources :transactions, only: %i[index create]
   get 'subscription/success', :to => 'subscriptions#success'
   post 'billing_portal/create', :to => 'billing_portal#create'
-  post 'webhooks/create', :to => 'webhooks#create'
+  get 'webhooks/create', :to => 'webhooks#create'
 end
