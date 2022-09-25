@@ -25,8 +25,15 @@ class WebhooksController < ApplicationController
     case event.type
     when 'checkout.session.completed'
       session = event.data.object
-      @user = User.find_by(stripe_customer_id: session.customer)
-      @user.update_attribute(:name, 'success')
+      user = User.find_by(stripe_customer_id: session.customer)
+      plan = Plan.find_by(stripe_price_id, session.id)
+      subscription = Subscription.new(user_id: user.id, plan_id: plan.id)
+      if @subscription.save
+        transaction = Transaction.create(user_id: user.id, subscription_id: subscription_id, amount: session.amount)
+        redirect_to plans_url, notice: 'Subscribed successfully.'
+      else
+        redirect_to plans_url, notice: 'Could not subscribe.'
+      end
     end
   end
 end

@@ -7,12 +7,7 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
   end
   def success
-    @subscription = Subscription.new(subscription_params)
-    if @subscription.save
-      redirect_to plans_url, notice: 'Subscribed successfully.'
-    else
-      redirect_to plans_url, notice: 'Could not subscribe.'
-    end
+
   end
 
   def destroy
