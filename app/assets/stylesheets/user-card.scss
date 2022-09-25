@@ -44,7 +44,10 @@
 .img-radius {
   border-radius: 5px;
 }
-
+.img-tag{
+  height: 70px;
+  border-radius: 30px;
+}
 
 
 h6 {
@@ -115,14 +118,4 @@ p {
 
 .m-t-40 {
   margin-top: 20px;
-}
-
-.user-card-full .social-link li {
-  display: inline-block;
-}
-
-.user-card-full .social-link li a {
-  font-size: 20px;
-  margin: 0 10px 0 0;
-  transition: all 0.3s ease-in-out;
 }

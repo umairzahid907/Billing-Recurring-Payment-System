@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: %i[ show edit update destroy ]
-
+  skip_before_action :authenticate_user!, only: %i[index]
   # GET /plans or /plans.json
   def index
     @plans = Plan.all

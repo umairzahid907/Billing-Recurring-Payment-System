@@ -26,5 +26,8 @@ class User < ApplicationRecord
   def avatar_format
     return unless avatar.attached?
     return if avatar.blob.content_type.start_with? 'image/'
+
+    avatar.purge_later
+    errors.add(:avatar, 'needs to be an image')
   end
 end
