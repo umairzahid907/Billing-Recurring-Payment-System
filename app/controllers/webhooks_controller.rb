@@ -26,7 +26,7 @@ class WebhooksController < ApplicationController
     when 'checkout.session.completed'
       session = event.data.object
       @user = User.find_by(stripe_customer_id: session.customer)
-      @user.update_attribute(name: success)
+      @user.update_attribute(name: 'success')
     end
 
     render json: { message: 'success' }
