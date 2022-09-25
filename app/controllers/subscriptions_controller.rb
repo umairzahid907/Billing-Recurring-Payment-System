@@ -3,6 +3,8 @@ class SubscriptionsController < ApplicationController
   before_action :make_payment, only: %i[create]
 
   def create
+    @subscription = Subscription.new(subscription_params)
+    authorize @subscription
   end
   def success
     @subscription = Subscription.new(subscription_params)
@@ -41,6 +43,7 @@ class SubscriptionsController < ApplicationController
   def make_payment
     plan = Plan.find(params[:plan_id])
     @session = Stripe::Checkout::Session.create({
+      customer: current_user.stripe_customer_id,
       payment_method_types: ['card'],
       line_items: [
         price: plan.stripe_price_id,

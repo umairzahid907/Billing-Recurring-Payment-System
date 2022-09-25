@@ -11,7 +11,7 @@
             <li><%= feature.name %></li>
           <% end %>
         </ul>
-        <td><%= render partial: 'subscriptions/button', locals: {plan: plan}%></td>
+        <td><%= render partial: 'subscriptions/button', locals: {plan: plan} if buyer?%></td>
         <td><%= link_to 'Add features', new_plan_feature_path(plan_id: plan.id), class:'btn btn-secondary' if admin? %></td>
       </div>
     </div>
