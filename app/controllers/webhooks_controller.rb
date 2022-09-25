@@ -25,7 +25,8 @@ class WebhooksController < ApplicationController
     case event.type
     when 'checkout.session.completed'
       session = event.data.object
-      p session
+      @user = User.find_by(stripe_customer_id: session.customer)
+      @user.update_attribute(:name, 'success')
     end
   end
 end
