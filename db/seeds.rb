@@ -5,11 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-u = User.find_or_create_by(name: 'admin', email: 'admin@gmail.com', role: 'admin', password: 'alliswell')
+u = User.find_or_create(name: 'admin', email: 'admin@gmail.com', role: 'admin', password: 'alliswell')
 u.skip_confirmation!
 u.save
 5.times do |i|
-  user = User.find_or_create_by(name: "user#{n}", email: "user#{n}@gmail.com", role: 'buyer', password: 'alliswell')
+  user = User.find_or_create(name: "user#{n}", email: "user#{n}@gmail.com", role: 'buyer', password: 'alliswell')
   user.skip_confirmation!
   user.save
 end
