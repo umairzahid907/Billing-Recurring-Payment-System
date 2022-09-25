@@ -1,5 +1,5 @@
 .padding {
-  padding: 3rem !important
+  padding: 3rem;
 }
 
 .user-card-full {
@@ -8,7 +8,6 @@
 
 .card {
   border-radius: 5px;
-  -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
   box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
   border: none;
   margin-bottom: 30px;
@@ -27,7 +26,6 @@
 }
 
 .bg-c-lite-green {
-  background: -webkit-gradient(linear, left top, right top, from(#6390f2), to(#5c5aee));
   background: linear-gradient(to right, #6390f2, #5c5aee);
 }
 
@@ -76,7 +74,7 @@ p {
 }
 
 .p-b-5 {
-  padding-bottom: 5px !important;
+  padding-bottom: 5px;
 }
 
 .card .card-block p {
@@ -88,7 +86,7 @@ p {
 }
 
 .text-muted {
-  color: #919aa3 !important;
+  color: #919aa3;
 }
 
 .b-b-default {
@@ -108,7 +106,7 @@ p {
 }
 
 .p-b-5 {
-  padding-bottom: 5px !important;
+  padding-bottom: 5px;
 }
 
 .m-b-10 {
@@ -126,6 +124,5 @@ p {
 .user-card-full .social-link li a {
   font-size: 20px;
   margin: 0 10px 0 0;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
