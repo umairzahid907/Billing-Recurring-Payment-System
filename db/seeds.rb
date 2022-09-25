@@ -5,11 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-u = User.find_or_create(name: 'admin', email: 'admin@gmail.com', role: 'admin', password: 'alliswell')
-u.skip_confirmation!
-u.save
-5.times do |i|
-  user = User.find_or_create(name: "user#{n}", email: "user#{n}@gmail.com", role: 'buyer', password: 'alliswell')
-  user.skip_confirmation!
-  user.save
+unless User.find_by(email: 'admin@gmail.com')
+  u = User.create(name: 'admin', email: 'admin@gmail.com', role: 'admin', password: 'alliswell')
+  u.skip_confirmation!
+  u.save
+end
+5.times do |n|
+  unless User.find_by(name: "user#{n}")
+    user = User.create(name: "user#{n}", email: "user#{n}@gmail.com", role: 'buyer', password: 'alliswell')
+    user.skip_confirmation!
+    user.save
+  end
 end
