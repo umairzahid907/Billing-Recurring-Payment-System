@@ -53,6 +53,5 @@ class SubscriptionsController < ApplicationController
       success_url: subscription_success_url(user_id: params[:user_id], plan_id: params[:plan_id]),
       cancel_url: root_url,
     })
-    p @session
   end
 end
