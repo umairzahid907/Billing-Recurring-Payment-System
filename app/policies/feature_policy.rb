@@ -3,15 +3,7 @@ class FeaturePolicy < ApplicationPolicy
     user.admin?
   end
 
-  def create?
-    new?
-  end
-
-  def edit?
-    create?
-  end
-
-  def destroy?
-    create?
-  end
+  alias :create? :new?
+  alias :update? :new?
+  alias :destroy? :new?
 end

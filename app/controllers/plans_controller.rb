@@ -1,6 +1,5 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: %i[ show edit update destroy ]
-  skip_before_action :authenticate_user!, only: %i[index]
   # GET /plans or /plans.json
   def index
     @plans = Plan.all
@@ -12,8 +11,8 @@ class PlansController < ApplicationController
 
   # GET /plans/new
   def new
+    authorize Plan
     @plan = Plan.new
-    authorize @plan
   end
 
   # GET /plans/1/edit
@@ -23,8 +22,8 @@ class PlansController < ApplicationController
 
   # POST /plans or /plans.json
   def create
+    authorize Plan
     @plan = Plan.new(plan_params)
-    authorize @plan
     if @plan.save
       redirect_to plan_url(@plan), notice: 'Plan was successfully created.'
     else

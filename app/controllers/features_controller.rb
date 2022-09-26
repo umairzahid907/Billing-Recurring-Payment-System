@@ -10,8 +10,8 @@ class FeaturesController < ApplicationController
   end
 
   def new
+    authorize Feature
     @feature = @plan.features.new
-    authorize @feature
   end
 
   def edit
@@ -19,8 +19,8 @@ class FeaturesController < ApplicationController
   end
 
   def create
+    authorize Feature
     @feature = @plan.features.new(feature_params)
-    authorize @feature
     if @feature.save
       redirect_to plan_url(@plan), notice: 'Feature was successfully created.'
     else
@@ -56,6 +56,9 @@ class FeaturesController < ApplicationController
 
     def set_feature
       @feature = Feature.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "This feature doesn't exist!"
+      redirect_to root_url
     end
 
     def feature_params

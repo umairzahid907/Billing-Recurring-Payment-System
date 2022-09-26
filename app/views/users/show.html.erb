@@ -7,3 +7,6 @@
     <%= render partial: 'features/show', locals: { features: sub.plan.features, user: @user} if sub.plan.features.any?%>
   <% end %>
 <% end %>
+<% if @user.transactions.any?%>
+  <%= render partial: 'transactions/show', locals: { transactions: @user.transactions } %>
+<% end %>
