@@ -73,3 +73,5 @@ gem 'jquery-rails', '~> 4.4'
 
 gem 'image_processing'
 gem 'cloudinary'
+
+gem 'rails_admin', '~> 2.1.1'

@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, required: true, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :unit_price %>
-    <%= form.number_field :unit_price %>
+    <%= form.number_field :unit_price, required: true, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :max_unit_limit %>
-    <%= form.number_field :max_unit_limit %>
+    <%= form.number_field :max_unit_limit, required: true, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.hidden_field :plan_id, value: @plan.id %>
   </div>
 

@@ -1,5 +1,9 @@
 <%= render partial: 'profile', locals: { user: @user } %>
 <h4>Subscriptions</h4>
-<% get_subs(@user).each do |sub|%>
-  <%= render partial: 'plan', locals: { plan: sub.plan } %>
+<% subs = get_subs(@user)%>
+<% if subs %>
+  <% subs.each do |sub|%>
+    <%= render partial: 'plan', locals: { plan: sub.plan } %>
+    <%= render partial: 'features/show', locals: { features: sub.plan.features, user: @user} if sub.plan.features.any?%>
+  <% end %>
 <% end %>

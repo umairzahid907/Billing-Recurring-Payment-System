@@ -79,13 +79,13 @@ ActiveRecord::Schema.define(version: 2022_09_24_223948) do
 
   create_table "usages", force: :cascade do |t|
     t.bigint "feature_id"
-    t.bigint "subscription_id"
+    t.bigint "user_id"
     t.integer "units_used", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["feature_id", "subscription_id"], name: "index_usages_on_feature_id_and_subscription_id", unique: true
+    t.index ["feature_id", "user_id"], name: "index_usages_on_feature_id_and_user_id", unique: true
     t.index ["feature_id"], name: "index_usages_on_feature_id"
-    t.index ["subscription_id"], name: "index_usages_on_subscription_id"
+    t.index ["user_id"], name: "index_usages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -127,5 +127,5 @@ ActiveRecord::Schema.define(version: 2022_09_24_223948) do
   add_foreign_key "transactions", "subscriptions"
   add_foreign_key "transactions", "users"
   add_foreign_key "usages", "features"
-  add_foreign_key "usages", "subscriptions"
+  add_foreign_key "usages", "users"
 end

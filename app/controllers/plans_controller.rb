@@ -56,6 +56,9 @@ class PlansController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
       @plan = Plan.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "This plan doesn't exist!"
+      redirect_to root_url
     end
 
     # Only allow a list of trusted parameters through.

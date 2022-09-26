@@ -6,24 +6,24 @@
 
   <% if f.object.class.require_password_on_accepting %>
 
-    <div class='field'>
+    <div class='field form-group'>
       <%= f.label :avatar %>
       <%= f.file_field :avatar, accept:'image/*', direct_upload: true%>
     </div>
 
-    <div class="field">
+    <div class="field form-group">
       <%= f.label :name %><br />
-      <%= f.text_field :name %>
+      <%= f.text_field :name, required: true, class:'form-control' %>
     </div>
 
-    <div class="field">
+    <div class="field form-group">
       <%= f.label :password %><br />
-      <%= f.password_field :password %>
+      <%= f.password_field :password, required: true, id: 'password', class:'form-control'  %>
     </div>
 
-    <div class="field">
+    <div class="field form-group">
       <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation, required: true, oninput: "check(this)", class:'form-control'  %>
     </div>
   <% end %>
 

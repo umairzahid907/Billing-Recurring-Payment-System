@@ -1,17 +1,8 @@
 class UsagesController < ApplicationController
-  before_action :set_usage, only: %i[ show edit update destroy ]
-
-  def index
-  end
-
-  def show
-  end
+  before_action :set_usage, only: %i[ edit update destroy ]
 
   def new
     @usage = Usage.new
-  end
-
-  def edit
   end
 
   def create
@@ -21,6 +12,9 @@ class UsagesController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
   end
 
   def update
@@ -41,10 +35,13 @@ class UsagesController < ApplicationController
 
   private
     def set_usage
-      @usage = usage.find(params[:id])
+      @usage = Usage.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "This usage doesn't exist!"
+      redirect_to root_url
     end
 
     def usage_params
-      params.require(:usage).permit(:feature_id, :subscription_id, :units_used)
+      params.require(:usage).permit(:feature_id, :user_id, :units_used)
     end
 end

@@ -10,6 +10,7 @@ class User < ApplicationRecord
          :confirmable
 
   has_many :plans
+  has_many :usages
   has_many :subscriptions, dependent: :destroy
   has_many :transactions, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
