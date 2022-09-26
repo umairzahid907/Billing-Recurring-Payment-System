@@ -1,5 +1,5 @@
-<h1>Receipt#transaction_created</h1>
+<h1>Transaction Successfull</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/receipt_mailer/transaction_created.html.erb
+  <%= @user.name %>, you have successfully transferred <%= @transaction.amount%> against plan <strong><%= @transaction.subscription.plan.name%></strong>
 </p>

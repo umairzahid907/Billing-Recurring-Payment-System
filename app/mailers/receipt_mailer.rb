@@ -6,8 +6,9 @@ class ReceiptMailer < ApplicationMailer
   #   en.receipt_mailer.transaction_created.subject
   #
   def transaction_created
-    @greeting = "Hi"
+    @user = params[:user]
+    @transaction = params[:transaction]
 
-    mail to: "to@example.org"
+    mail to: @user.email
   end
 end

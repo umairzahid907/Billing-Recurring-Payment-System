@@ -5,4 +5,10 @@ module UserHelper
       user.subscriptions.last.plan
     end
   end
+
+  def get_subs(user)
+    if user.subscriptions.any?
+      user.subscriptions
+    end
+  end
 end

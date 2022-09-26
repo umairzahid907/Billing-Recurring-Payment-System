@@ -1,13 +1,18 @@
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[destroy]
   before_action :make_payment, only: %i[create]
-
+  after_action :perform_transaction, only: %i[success]
   def create
     @subscription = Subscription.new(subscription_params)
     authorize @subscription
   end
   def success
-
+    @subscription = Subscription.new(subscription_params)
+    if @subscription.save
+      redirect_to plans_url, notice: 'Subscribed successfully.'
+    else
+      redirect_to plans_url, notice: 'Could not subscribe.'
+    end
   end
 
   def destroy
@@ -32,7 +37,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def perform_transaction
-    Transaction.create(user_id: @subscription.user_id, subscription_id: @subscription.id, amount: @subscription.plan.monthly_fee)
+    transaction = Transaction.create(user_id: @subscription.user_id, subscription_id: @subscription.id, amount: @subscription.plan.monthly_fee)
+    ReceiptMailer.with(user: @subscription.user, transaction: transaction).transaction_created.deliver_later
   end
 
   def make_payment
@@ -45,7 +51,7 @@ class SubscriptionsController < ApplicationController
         quantity: 1,
       ],
       mode: 'subscription',
-      success_url: root_url,
+      success_url: subscription_success_url(user_id: params[:user_id], plan_id: params[:plan_id]),
       cancel_url: root_url,
     })
   end

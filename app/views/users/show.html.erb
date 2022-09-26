@@ -1,1 +1,5 @@
 <%= render partial: 'profile', locals: { user: @user } %>
+<h4>Subscriptions</h4>
+<% get_subs(@user).each do |sub|%>
+  <%= render partial: 'plan', locals: { plan: sub.plan } %>
+<% end %>
