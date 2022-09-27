@@ -11,11 +11,11 @@ class WebhooksController < ApplicationController
       event = Stripe::Webhook.construct_event(
         payload, sig_header, 'whsec_GbdI9YkkbDqe2RXnyHU8xeWPOp2lwRAo'
       )
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError
       # Invalid payload
       status 400
       return
-    rescue Stripe::SignatureVerificationError => e
+    rescue Stripe::SignatureVerificationError
       # Invalid signature
       status 400
       return
