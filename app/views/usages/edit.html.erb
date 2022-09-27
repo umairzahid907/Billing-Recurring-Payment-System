@@ -1,0 +1,11 @@
+<%= form_with(model: @usage, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :units_used %>
+    <%= form.number_field :units_used, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'submit'%>
+  </div>
+<% end %>

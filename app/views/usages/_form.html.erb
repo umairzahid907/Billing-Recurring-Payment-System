@@ -1,0 +1,18 @@
+<%= form_with(model: usage, local: true) do |form| %>
+  <div class="field">
+    <%= form.hidden_field :feature_id, value: params[:feature_id] %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.hidden_field :user_id, value: params[:user_id] %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :units_used %>
+    <%= form.number_field :units_used, required: true, class:'form-control'%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'submit'%>
+  </div>
+<% end %>

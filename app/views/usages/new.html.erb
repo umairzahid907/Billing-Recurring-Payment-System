@@ -1,18 +1,1 @@
-<%= form_with(model: @usage, local: true) do |form| %>
-  <div class="field">
-    <%= form.hidden_field :feature_id, value: params[:feature_id] %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :subscription_id, value: params[:subscription_id] %>
-  </div>
-
-  <div class="field">
-    <%= form.label :units_used %>
-    <%= form.number_field :units_used %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'submit'%>
-  </div>
-<% end %>
+<%= render 'form', usage: @usage %>
