@@ -46,7 +46,7 @@ class SubscriptionsController < ApplicationController
 
   def make_payment
     plan = Plan.find(params[:plan_id])
-    unless current_user.stripe_customer_id
+    if current_user.stripe_customer_id
       success_url = subscription_success_url(user_id: params[:user_id], plan_id: params[:plan_id])
       session = CheckoutSession.new(plan, current_user, success_url)
       @session = session.create
