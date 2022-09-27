@@ -1,11 +1,12 @@
-class TransactionsController < ApplicationController
+# frozen_string_literal: true
 
+class TransactionsController < ApplicationController
   def index
     authorize Transaction
-    if params[:user_id].present?
-      @transactions = Transaction.where(user_id: params[:user_id])
-    else
-      @transactions = Transaction.all
-    end
+    @transactions = if params[:user_id].present?
+                      Transaction.where(user_id: params[:user_id])
+                    else
+                      Transaction.all
+                    end
   end
 end

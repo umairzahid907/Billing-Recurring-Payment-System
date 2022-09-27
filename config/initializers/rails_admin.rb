@@ -1,5 +1,6 @@
-RailsAdmin.config do |config|
+# frozen_string_literal: true
 
+RailsAdmin.config do |config|
   config.authorize_with do
     if user_signed_in?
       unless current_user.admin?

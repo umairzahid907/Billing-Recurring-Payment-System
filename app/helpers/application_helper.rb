@@ -1,10 +1,7 @@
 # frozen_string_literal: true
-module ApplicationHelper
-  def admin?
-    current_user.admin?
-  end
 
-  def buyer?
-    current_user.buyer?
-  end
+module ApplicationHelper
+  delegate :admin?, to: :current_user
+
+  delegate :buyer?, to: :current_user
 end

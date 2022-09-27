@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -39,6 +41,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
 end
 
 group :development do
@@ -71,7 +76,7 @@ gem 'stripe'
 
 gem 'jquery-rails', '~> 4.4'
 
-gem 'image_processing'
 gem 'cloudinary'
+gem 'image_processing'
 
 gem 'rails_admin', '~> 2.1.1'

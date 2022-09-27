@@ -9,8 +9,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
-  has_many :plans
-  has_many :usages
+  has_many :plans, dependent: :nullify
+  has_many :usages, dependent: :nullify
   has_many :subscriptions, dependent: :destroy
   has_many :transactions, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
@@ -19,9 +19,9 @@ class User < ApplicationRecord
 
   def register_customer
     response = Stripe::Customer.create({
-                  email: email
-                })
-    update_attribute(:stripe_customer_id, response[:id])
+                                         email: email
+                                       })
+    update(:stripe_customer_id, response[:id])
   end
 
   def avatar_format

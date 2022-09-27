@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 class PlansController < ApplicationController
-  before_action :set_plan, only: %i[ show edit update destroy ]
+  before_action :set_plan, only: %i[show edit update destroy]
   # GET /plans or /plans.json
   def index
     @plans = Plan.all
   end
 
   # GET /plans/1 or /plans/1.json
-  def show
-  end
+  def show; end
 
   # GET /plans/new
   def new
@@ -52,16 +53,14 @@ class PlansController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_plan
-      @plan = Plan.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "This plan doesn't exist!"
-      redirect_to root_url
-    end
 
-    # Only allow a list of trusted parameters through.
-    def plan_params
-      params.require(:plan).permit(:name, :monthly_fee, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_plan
+    @plan = Plan.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def plan_params
+    params.require(:plan).permit(:name, :monthly_fee, :user_id)
+  end
 end
