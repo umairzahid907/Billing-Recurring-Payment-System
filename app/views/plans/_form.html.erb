@@ -11,21 +11,21 @@
     </div>
   <% end %>
 
-  <div class='field'>
+  <div class='field form-group'>
     <%= form.label :name %>
-    <%= form.text_field :name, required: true%>
+    <%= form.text_field :name, required: true, class:'form-control'%>
   </div>
 
-  <div class='field'>
+  <div class='field form-group'>
     <%= form.label 'Monthly fee' %>
-    <%= form.text_field :monthly_fee, required: true%>
+    <%= form.text_field :monthly_fee, required: true, class:'form-control'%>
   </div>
 
-  <div class='field'>
+  <div class='field form-group'>
     <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary'%>
   </div>
 <% end %>
