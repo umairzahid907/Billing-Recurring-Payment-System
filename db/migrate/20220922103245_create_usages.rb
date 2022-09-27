@@ -3,9 +3,9 @@
 class CreateUsages < ActiveRecord::Migration[5.2]
   def change
     create_table :usages do |t|
+      t.integer :units_used, null: false
       t.references :feature, foreign_key: true
       t.references :user, foreign_key: true
-      t.integer :units_used, null: false
 
       t.timestamps
     end
