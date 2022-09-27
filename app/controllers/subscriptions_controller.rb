@@ -38,8 +38,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def perform_transaction
-    transaction = Transaction.new(@subscription)
-    if transaction.perform_transaction
+    transaction = SubscriptionService.new(@subscription).perform_transaction
+    if transaction
       ReceiptMailer.with(user: @subscription.user, transaction: transaction).transaction_created.deliver_later
     end
   end
@@ -48,7 +48,7 @@ class SubscriptionsController < ApplicationController
     plan = Plan.find(params[:plan_id])
     if current_user.stripe_customer_id
       success_url = subscription_success_url(user_id: params[:user_id], plan_id: params[:plan_id])
-      session = CheckoutSession.new(plan, current_user, success_url)
+      session = CheckoutSession.new(plan, current_user, success_url, root_url)
       @session = session.create
     else
       flash[:alert] = "Unable to subscribe"
