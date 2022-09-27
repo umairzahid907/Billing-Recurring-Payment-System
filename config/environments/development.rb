@@ -16,7 +16,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
@@ -62,4 +62,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Store files locally.
+  config.active_storage.service = :local
 end

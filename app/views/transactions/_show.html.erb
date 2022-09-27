@@ -1,0 +1,25 @@
+<h4>Transactions</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope='col'>Id</th>
+      <th scope='col'>User id</th>
+      <th scope='col'>Plan</th>
+      <th scope='col'>Amount</th>
+      <th scope='col'>State</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.id %></td>
+        <td><%= transaction.user_id %></td>
+        <td><%= transaction.subscription.plan.name %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.state %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

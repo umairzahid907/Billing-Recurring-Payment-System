@@ -1,0 +1,30 @@
+<h4>Features</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Unit price</th>
+      <th scope="col">Max unit limit</th>
+      <th scope="col">Units used</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% features.each do |feature| %>
+      <tr>
+        <td><%= feature.name %></td>
+        <td><%= feature.unit_price %></td>
+        <td><%= feature.max_unit_limit %></td>
+        <% usage = get_usage(feature, user)%>
+        <% if usage %>
+          <td><%= usage.units_used %></td>
+          <td><%= link_to 'Edit usage', edit_usage_path(usage) if admin?%></td>
+        <% else %>
+          <td>0</td>
+          <td><%= link_to 'Add usage', new_usage_path(feature_id: feature.id, user_id: user.id) if admin?%></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
