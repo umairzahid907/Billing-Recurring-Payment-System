@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :subscriptions, only: %i[new create destroy]
   resources :usages
   resources :transactions, only: %i[index]
+  resources :webhooks, only: %i[create]
   get 'subscription/success', to: 'subscriptions#success'
   post 'billing_portal/create', to: 'billing_portal#create'
 end

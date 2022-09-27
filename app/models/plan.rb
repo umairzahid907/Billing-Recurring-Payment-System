@@ -19,6 +19,6 @@ class Plan < ApplicationRecord
                                         name: name
                                       }
                                     })
-    update(:stripe_price_id, response[:id])
+    update(stripe_price_id: response[:id])
   end
 end

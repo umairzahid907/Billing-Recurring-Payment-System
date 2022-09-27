@@ -2,7 +2,8 @@
 
 class UsagesController < ApplicationController
   before_action :set_usage, only: %i[edit update destroy]
-
+  after_action :add_to_stripe, only: %i[create]
+  after_action :update_to_stripe, only: %i[update]
   def new
     @usage = Usage.new
   end
@@ -42,5 +43,38 @@ class UsagesController < ApplicationController
 
   def usage_params
     params.require(:usage).permit(:feature_id, :user_id, :units_used)
+  end
+
+  def add_to_stripe
+    feature = @usage.feature
+    bill = usage_bill
+    response = Stripe::Price.create({
+                                      unit_amount: bill,
+                                      currency: 'usd',
+                                      product_data: {
+                                        name: feature.name
+                                      }
+                                    })
+    @usage.update(:stripe_price_id, response[:id])
+  end
+
+  def update_to_stripe
+    bill = usage_bill
+    Stripe::Price.update({
+                           unit_amount: bill
+                         })
+  end
+
+  def usage_bill
+    feature = @usage.feature
+    if @usage.units_used > feature.max_limit
+      (@usage.units_used - feature.max_limit) * feature.unit_price
+    else
+      0
+    end
+  end
+
+  def update_subscription
+
   end
 end
