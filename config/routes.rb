@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :plans do
     resources :features
   end
-  resources :users, only: %i[index show]
+  resources :users, only: %i[index show edit update]
   resources :subscriptions, only: %i[new create destroy]
   resources :usages
   resources :transactions, only: %i[index]

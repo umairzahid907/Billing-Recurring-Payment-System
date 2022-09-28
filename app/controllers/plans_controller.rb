@@ -2,6 +2,8 @@
 
 class PlansController < ApplicationController
   before_action :set_plan, only: %i[show edit update destroy]
+  before_action :access?
+  skip_before_action :access?, only: %i[index show]
   # GET /plans or /plans.json
   def index
     @plans = Plan.all
@@ -12,18 +14,14 @@ class PlansController < ApplicationController
 
   # GET /plans/new
   def new
-    authorize Plan
     @plan = Plan.new
   end
 
   # GET /plans/1/edit
-  def edit
-    authorize @plan
-  end
+  def edit; end
 
   # POST /plans or /plans.json
   def create
-    authorize Plan
     @plan = Plan.new(plan_params)
     if @plan.save
       redirect_to plans_path, notice: 'Plan was successfully created.'
@@ -34,7 +32,6 @@ class PlansController < ApplicationController
 
   # PATCH/PUT /plans/1 or /plans/1.json
   def update
-    authorize @plan
     if @plan.update(plan_params)
       redirect_to plans_path, notice: 'Plan was successfully updated.'
     else
@@ -44,7 +41,6 @@ class PlansController < ApplicationController
 
   # DELETE /plans/1 or /plans/1.json
   def destroy
-    authorize @plan
     if @plan.destroy
       redirect_to plans_url, notice: 'Plan was successfully destroyed.'
     else
@@ -62,5 +58,9 @@ class PlansController < ApplicationController
   # Only allow a list of trusted parameters through.
   def plan_params
     params.require(:plan).permit(:name, :monthly_fee, :user_id)
+  end
+
+  def access?
+    authorize Plan
   end
 end

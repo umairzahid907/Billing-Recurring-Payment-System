@@ -1,0 +1,4 @@
+<p><%= @user.email %></p>
+
+<%= link_to 'Admin', user_path(role: :admin), method: :patch, class:'btn btn-primary' unless admin?%>
+<%= link_to 'Buyer', user_path(role: :buyer), method: :patch, class:'btn btn-primary' unless buyer?%>

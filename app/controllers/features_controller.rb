@@ -3,7 +3,8 @@
 class FeaturesController < ApplicationController
   before_action :set_feature, only: %i[show edit update destroy]
   before_action :set_plan
-
+  before_action :access?
+  skip_before_action :access?, only: %i[index show]
   def index
     @features = @plan.features.all
   end
@@ -11,16 +12,12 @@ class FeaturesController < ApplicationController
   def show; end
 
   def new
-    authorize Feature
     @feature = @plan.features.new
   end
 
-  def edit
-    authorize @feature
-  end
+  def edit; end
 
   def create
-    authorize Feature
     @feature = @plan.features.new(feature_params)
     if @feature.save
       redirect_to plan_url(@plan), notice: 'Feature was successfully created.'
@@ -30,7 +27,6 @@ class FeaturesController < ApplicationController
   end
 
   def update
-    authorize @feature
     if @feature.update(feature_params)
       redirect_to plan_url(@plan), notice: 'Feature was successfully updated.'
     else
@@ -39,7 +35,6 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
-    authorize @feature
     if @feature.destroy
       redirect_to plan_url(@plan), notice: 'Feature was successfully destroyed.'
     else
@@ -59,5 +54,9 @@ class FeaturesController < ApplicationController
 
   def feature_params
     params.require(:feature).permit(:name, :unit_price, :max_unit_limit, :plan_id)
+  end
+
+  def access?
+    authorize Feature
   end
 end

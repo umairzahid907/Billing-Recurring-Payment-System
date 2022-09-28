@@ -1,5 +1,6 @@
+<%= link_to 'Delete', plan_path(@plan), method: :delete, class:'user-show' if admin?%>
+<%= link_to 'Edit', edit_plan_path(@plan), class:'user-show' if admin?%>
 <%= render partial: 'show', locals: { plan: @plan } %>
-
 <% if @plan.features.any? %>
   <%= render partial: 'features', locals: { features: @plan.features } %>
 <% end %>

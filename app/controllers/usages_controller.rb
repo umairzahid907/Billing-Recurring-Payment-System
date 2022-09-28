@@ -60,6 +60,5 @@ class UsagesController < ApplicationController
       @usage.user.stripe_customer_id,
       { balance: bill }
     )
-    p bill
   end
 end

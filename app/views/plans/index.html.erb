@@ -1,6 +1,7 @@
 <h1 class='text-center'>Plans</h1>
 <br>
-<%= link_to 'New Plan', new_plan_path, class:'btn btn-primary' if admin?%>
+<%= link_to 'New Plan', new_plan_path, class:'user-show' if admin?%>
+<br>
 <div class='scroll'>
   <% @plans.each do |plan| %>
     <%= link_to 'View', plan_path(plan), class: 'user-show'%>

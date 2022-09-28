@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit destroy]
-
+  before_action :set_user, only: %i[show edit update destroy]
+  before_action :access?
   def index
     @user = User.all
   end
@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   def show; end
 
   def edit; end
+
+  def update
+    @user.update(role: params[:role])
+    redirect_to users_path
+  end
 
   def destroy
     if @user.destroy
@@ -24,5 +29,9 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def access?
+    authorize current_user
   end
 end
