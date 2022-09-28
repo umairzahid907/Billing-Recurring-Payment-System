@@ -9,16 +9,18 @@ class CheckoutSession
   end
 
   def create
-    Stripe::Checkout::Session.create({
-                                       customer: @user.stripe_customer_id,
-                                       payment_method_types: ['card'],
-                                       line_items: [
-                                         price: @object.stripe_price_id,
-                                         quantity: 1
-                                       ],
-                                       mode: 'subscription',
-                                       success_url: @success_url,
-                                       cancel_url: @cancel_url
-                                     })
+    Stripe::Checkout::Session.create(
+      {
+        customer: @user.stripe_customer_id,
+        payment_method_types: ['card'],
+        line_items: [
+          price: @object.stripe_price_id,
+          quantity: 1
+        ],
+        mode: 'subscription',
+        success_url: @success_url + '&session_id={CHECKOUT_SESSION_ID}',
+        cancel_url: @cancel_url
+      }
+    )
   end
 end

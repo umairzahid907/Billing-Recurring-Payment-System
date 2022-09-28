@@ -4,13 +4,16 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[destroy]
   before_action :make_payment, only: %i[create]
   after_action :perform_transaction, only: %i[success]
+
   def create
     authorize Subscription
-    @subscription = Subscription.new(subscription_params)
   end
 
   def success
     @subscription = Subscription.new(subscription_params)
+    session_id = params[:session_id]
+    subscription_id = SubscriptionService.new(@subscription).retrieve_subscription_id(session_id)
+    @subscription.stripe_subscription_id = subscription_id
     if @subscription.save
       redirect_to plans_url, notice: 'Subscribed successfully.'
     else
@@ -19,8 +22,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    authorize Subscription
-    if @subscription.destroy
+    authorize @subscription
+    if destroy_from_stripe != 'canceled' && @subscription.destroy
       redirect_to plans_url, notice: 'Unsubscribed.'
     else
       redirect_to plans_url, notice: 'Could not unsubscribe.'
@@ -50,5 +53,10 @@ class SubscriptionsController < ApplicationController
     success_url = subscription_success_url(user_id: params[:user_id], plan_id: params[:plan_id])
     session = CheckoutSession.new(plan, current_user, success_url, root_url)
     @session = session.create
+  end
+
+  def destroy_from_stripe
+    subscription = Stripe::Subscription.delete(@subscription.stripe_subscription_id)
+    subscription.status == 'canceled'
   end
 end

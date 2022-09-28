@@ -19,11 +19,12 @@ class User < ApplicationRecord
 
   def register_customer
     response = Stripe::Customer.create({ email: email })
-    self.update!(stripe_customer_id: response[:id])
+    self.stripe_customer_id = response[:id]
   end
 
   def avatar_format
-    return unless avatar.attached? || !(avatar.blob.content_type.start_with? 'image/')
+    return unless avatar.attached?
+    return if avatar.blob.content_type.start_with? 'image/'
 
     avatar.purge_later
     errors.add(:avatar, 'needs to be an image')

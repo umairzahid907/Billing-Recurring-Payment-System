@@ -3,4 +3,6 @@
 
 <% if sub.nil? %>
   <%= link_to 'Subscribe', subscriptions_path(id: plan.id, user_id: current_user.id, plan_id: plan.id), method: :post, remote: true ,class:'btn btn-primary'%>
+<% else %>
+  <%= link_to 'Unsubscribe', subscription_path(sub), method: :delete,class:'btn btn-secondary'%>
 <% end %>

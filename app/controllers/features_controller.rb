@@ -41,9 +41,9 @@ class FeaturesController < ApplicationController
   def destroy
     authorize @feature
     if @feature.destroy
-      redirect_to plan_features_url, notice: 'Feature was successfully destroyed.'
+      redirect_to plan_url(@plan), notice: 'Feature was successfully destroyed.'
     else
-      redirect_to plan_feature_url(@feature), alert: 'Could not delete this feature.'
+      redirect_to plan_url(@plan), alert: 'Could not delete this feature.'
     end
   end
 

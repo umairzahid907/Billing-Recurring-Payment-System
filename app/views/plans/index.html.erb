@@ -3,6 +3,7 @@
 <%= link_to 'New Plan', new_plan_path, class:'btn btn-primary' if admin?%>
 <div class='scroll'>
   <% @plans.each do |plan| %>
+    <%= link_to 'View', plan_path(plan), class: 'user-show'%>
     <%= render partial: 'show', locals: { plan: plan } %>
   <% end %>
 </div>

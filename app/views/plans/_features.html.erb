@@ -1,0 +1,28 @@
+<h4>Features</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Unit price</th>
+      <th scope="col">Max unit limit</th>
+      <% if admin? %>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% features.each do |feature| %>
+      <tr>
+        <td><%= feature.name %></td>
+        <td><%= feature.unit_price %></td>
+        <td><%= feature.max_unit_limit %></td>
+        <% if admin? %>
+          <td><%= link_to 'edit', edit_plan_feature_path(@plan, feature), class: 'user-show'%></td>
+          <td><%= link_to 'delete', plan_feature_path(@plan, feature), method: :delete, class: 'user-show'%></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

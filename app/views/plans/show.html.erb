@@ -1,3 +1,6 @@
 <%= render partial: 'show', locals: { plan: @plan } %>
 
-<%= render partial: 'features/form' %>
+<% if @plan.features.any? %>
+  <%= render partial: 'features', locals: { features: @plan.features } %>
+<% end %>
+<%= render partial: 'features/form' if admin?%>

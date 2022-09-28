@@ -1,36 +1,23 @@
-<%= form_with(model: [@plan, feature], local: true) do |form| %>
-  <% if feature.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
-
-      <ul>
-      <% feature.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_with(model: [@plan, @plan.features.build]) do |form| %>
+  <div class="row">
+    <div class="field form-group col">
+      <%= form.text_field :name, required: true, placeholder: 'Name', class:'form-control' %>
     </div>
-  <% end %>
 
-  <div class="field form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, required: true, class:'form-control' %>
-  </div>
+    <div class="field form-group col">
+      <%= form.number_field :unit_price, required: true, placeholder: 'Unit price', class:'form-control' %>
+    </div>
 
-  <div class="field form-group">
-    <%= form.label :unit_price %>
-    <%= form.number_field :unit_price, required: true, class:'form-control' %>
-  </div>
+    <div class="field form-group col">
+      <%= form.number_field :max_unit_limit, required: true, placeholder: 'Max units limit', class:'form-control' %>
+    </div>
 
-  <div class="field form-group">
-    <%= form.label :max_unit_limit %>
-    <%= form.number_field :max_unit_limit, required: true, class:'form-control' %>
-  </div>
+    <div class="actions col">
+      <%= form.submit 'Add feature', class:'btn btn-secondary'%>
+    </div>
 
-  <div class="field form-group">
-    <%= form.hidden_field :plan_id, value: @plan.id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'submit'%>
+    <div class="field form-group">
+      <%= form.hidden_field :plan_id, value: @plan.id %>
+    </div>
   </div>
 <% end %>

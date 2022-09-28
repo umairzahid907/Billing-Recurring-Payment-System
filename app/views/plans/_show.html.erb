@@ -6,13 +6,7 @@
         <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="15">$<span class="price"><%= plan.monthly_fee %></span><span class="h6 text-muted ml-2">/ per month</span></h1>
       </div>
       <div class="card-body pt-0">
-        <ul class="list-unstyled mb-4">
-          <% plan.features.each do |feature| %>
-            <li><%= feature.name %></li>
-          <% end %>
-        </ul>
         <td><%= render partial: 'subscriptions/button', locals: {plan: plan} if buyer?%></td>
-        <td><%= link_to 'Add features', new_plan_feature_path(plan_id: plan.id), class:'btn btn-secondary' if admin? %></td>
       </div>
     </div>
   </div>

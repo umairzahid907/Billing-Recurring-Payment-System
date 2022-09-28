@@ -26,7 +26,7 @@ class PlansController < ApplicationController
     authorize Plan
     @plan = Plan.new(plan_params)
     if @plan.save
-      redirect_to plan_url(@plan), notice: 'Plan was successfully created.'
+      redirect_to plans_path, notice: 'Plan was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class PlansController < ApplicationController
   def update
     authorize @plan
     if @plan.update(plan_params)
-      redirect_to plan_url(@plan), notice: 'Plan was successfully updated.'
+      redirect_to plans_path, notice: 'Plan was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end

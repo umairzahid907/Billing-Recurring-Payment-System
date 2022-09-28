@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_27_083601) do
+ActiveRecord::Schema.define(version: 2022_09_27_123854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 2022_09_27_083601) do
   end
 
   create_table "plans", force: :cascade do |t|
-    t.bigint "user_id"
     t.string "name", limit: 50, null: false
     t.integer "monthly_fee", null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "stripe_price_id", default: "null"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2022_09_27_083601) do
     t.bigint "plan_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_subscription_id", default: "null"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["user_id", "plan_id"], name: "index_subscriptions_on_user_id_and_plan_id", unique: true
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
@@ -68,9 +69,9 @@ ActiveRecord::Schema.define(version: 2022_09_27_083601) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "amount", null: false
+    t.integer "state", default: 0, null: false
     t.bigint "user_id"
     t.bigint "subscription_id"
-    t.integer "state", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
@@ -78,12 +79,11 @@ ActiveRecord::Schema.define(version: 2022_09_27_083601) do
   end
 
   create_table "usages", force: :cascade do |t|
+    t.integer "units_used", null: false
     t.bigint "feature_id"
     t.bigint "user_id"
-    t.integer "units_used", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "stripe_price_id", default: "null"
     t.index ["feature_id", "user_id"], name: "index_usages_on_feature_id_and_user_id", unique: true
     t.index ["feature_id"], name: "index_usages_on_feature_id"
     t.index ["user_id"], name: "index_usages_on_user_id"

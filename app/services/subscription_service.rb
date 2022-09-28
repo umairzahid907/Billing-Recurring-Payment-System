@@ -13,4 +13,9 @@ class SubscriptionService
     )
     transaction if transaction.save
   end
+
+  def retrieve_subscription_id(session_id)
+    session = Stripe::Checkout::Session.retrieve(session_id)
+    session.subscription
+  end
 end

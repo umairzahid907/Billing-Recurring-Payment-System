@@ -11,9 +11,6 @@
         </li>
         <% if user_signed_in?%>
           <li class='nav-item'>
-            <%= link_to 'Manage Billings', billing_portal_create_path, method: :post, class:'nav-link' if buyer?%>
-          </li>
-          <li class='nav-item'>
             <%= link_to 'Plans', plans_path, class:'nav-link'%>
           </li>
           <li class='nav-item'>
