@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   def register_customer
     response = Stripe::Customer.create({ email: email })
-    update(stripe_price_id: response[:id])
+    update(stripe_customer_id: response[:id])
   end
 
   def avatar_format
